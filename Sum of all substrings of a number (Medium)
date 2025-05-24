@@ -1,3 +1,5 @@
+Companies Asked : Amazon Google Microsoft Adobe Flipkart Oracle Samsung Paytm Walmart Labs
+
 // Java Code : 
 class Solution {
     public static int sumSubstrings(String s) {
