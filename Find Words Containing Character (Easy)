@@ -1,0 +1,33 @@
+Companies Asked : Amazon, Microsoft, Google, Adobe, TCS, Infosys, Wipro, Accenture, Zoho, Swiggy, Meesho
+
+Java Code : 
+class Solution {
+    public List<Integer> findWordsContaining(String[] words, char x) {
+        ArrayList<Integer> result = new ArrayList<>();
+
+        for(int i = 0; i < words.length; i++){
+            if(words[i].indexOf(x) != -1) result.add(i);
+        }
+
+        return result;
+    }
+}
+
+C++ Code :
+#include <vector>
+#include <string>
+
+class Solution {
+public:
+    std::vector<int> findWordsContaining(std::vector<std::string>& words, char x) {
+        std::vector<int> result;
+
+        for (int i = 0; i < words.size(); ++i) {
+            if (words[i].find(x) != std::string::npos) {
+                result.push_back(i);
+            }
+        }
+
+        return result;
+    }
+};
