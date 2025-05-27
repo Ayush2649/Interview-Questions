@@ -1,0 +1,47 @@
+Company Tags : Amazon Google Microsoft Facebook (Meta) Apple Adobe Oracle Walmart Labs Paytm Flipkart Salesforce
+
+// Java Code : 
+class Solution {  // O(m + n)
+    public ArrayList<Integer> intersectionWithDuplicates(int[] a, int[] b) {
+        // code here
+        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> resultSet = new HashSet<>();
+        
+        for(int num : a){
+            set.add(num);
+        }
+        
+        for(int num : b){
+            if(set.contains(num)){
+                resultSet.add(num);
+            }
+        }
+        
+        return new ArrayList<>(resultSet);
+    }
+}
+
+// C++ Code : 
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> intersectionWithDuplicates(vector<int>& a, vector<int>& b) {
+        unordered_set<int> set;
+        unordered_set<int> resultSet;
+        
+        for(int num : a) {
+            set.insert(num);
+        }
+        
+        for(int num : b) {
+            if(set.find(num) != set.end()) {
+                resultSet.insert(num);
+            }
+        }
+        
+        return vector<int>(resultSet.begin(), resultSet.end());
+    }
+};
