@@ -1,0 +1,106 @@
+Company Tags : Amazon Microsoft Walmart
+
+// Java Code : 
+class Solution {
+
+    // Function to return length of longest subsequence of consecutive integers.
+    public int longestConsecutive(int[] arr) {
+        // code here
+        int n = arr.length;
+        
+        // Approach 1 - O(n*logn)
+        Arrays.sort(arr);
+        
+        int cnt = 1;
+        int ans = 1;
+        
+        for(int i = 1; i < n; i++){
+            if(arr[i] == arr[i - 1]){
+                continue;
+            } else if (arr[i] == arr[i - 1] + 1){
+                cnt++;
+            } else {
+                cnt = 1;
+            }
+            
+            ans = Math.max(cnt, ans);
+        }
+        
+        return ans;
+        
+        // Approach 2 - O(n)
+        HashSet<Integer> set = new HashSet<>();
+        int res = 0;
+        
+        for(int val : arr){
+            set.add(val);
+        }
+        
+        for(int val : arr){
+            
+            if(set.contains(val) && !set.contains(val - 1)){
+                
+                int curr = val, cnt  = 0;
+                
+                while(set.contains(curr)){
+                    
+                    set.remove(val);
+                    curr++;
+                    cnt++;
+                }
+                
+                res = Math.max(res, cnt);
+            }
+        }
+        
+        return res;
+    }
+}
+
+C++ Code :
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& arr) {
+        int n = arr.size();
+        if (n == 0) return 0;
+
+        // Approach 1 - Sorting
+        sort(arr.begin(), arr.end());
+        int cnt = 1;
+        int ans = 1;
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i] == arr[i - 1]) {
+                continue;
+            } else if (arr[i] == arr[i - 1] + 1) {
+                cnt++;
+            } else {
+                cnt = 1;
+            }
+            ans = max(ans, cnt);
+        }
+
+        return ans;
+
+        // Approach 2 - HashSet
+        unordered_set<int> s(arr.begin(), arr.end());
+        int res = 0;
+
+        for (int val : arr) {
+            if (!s.count(val - 1)) {
+                int curr = val;
+                int cnt = 0;
+                while (s.count(curr)) {
+                    curr++;
+                    cnt++;
+                }
+                res = max(res, cnt);
+            }
+        }
+
+        return res;
+    }
+};
