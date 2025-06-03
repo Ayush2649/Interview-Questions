@@ -1,0 +1,69 @@
+Companies Asked : Meta (Facebook), Google, Amazon, Samsung, Goldman Sachs, Deloitte
+
+// Java Code :
+class Solution {
+    int countPairs(int arr[], int target) {
+        // Your code here
+        Arrays.sort(arr);
+        int n = arr.length;
+        int count = 0;
+        int left = 0, right = n - 1;
+        
+        // Approach 1 - O(n^2)
+        for(int i = 0; i < n; i++){
+            for(int j = i + 1; j < n; j++){
+                if(arr[i] + arr[j] < target) count++;
+            }
+        }
+        
+        // Approach 2 - O(n*logn + n)
+        while(left < right){
+            int sum = arr[left] + arr[right];
+            
+            if(sum < target){
+                count += right - left;
+                left++;
+            } else {
+                right--;
+            }
+        }
+        
+        return count;
+    }
+}
+
+// C++ Code : 
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int countPairs(vector<int>& arr, int target) {
+        sort(arr.begin(), arr.end());
+        int n = arr.size();
+        int count = 0;
+
+        // Approach 1 - O(n^2)
+        for(int i = 0; i < n; i++) {
+            for(int j = i + 1; j < n; j++) {
+                if(arr[i] + arr[j] < target) count++;
+            }
+        }
+
+        // Approach 2 - O(n log n + n)
+        int left = 0, right = n - 1;
+
+        while(left < right) {
+            int sum = arr[left] + arr[right];
+
+            if(sum < target) {
+                count += right - left;
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return count;
+    }
+};
