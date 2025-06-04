@@ -1,0 +1,85 @@
+Companies Asked : Amazon, Meta (Facebook), Expedia Group, Goldman Sachs
+
+// Java Code : 
+class Solution { // O(n * logn)
+    public List<Integer> sumClosest(int[] arr, int target) {
+        // code here
+        int n = arr.length;
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        if(n < 2) return result;
+        
+        Arrays.sort(arr);
+        
+        int left = 0, right = n - 1;
+        int minDiff = Integer.MAX_VALUE;
+        int maxAbsDiff = Integer.MIN_VALUE;
+        
+        while(left < right){
+            int sum = arr[left] + arr[right];
+            int diff = Math.abs(sum - target);
+            
+            int absDiff = Math.abs(arr[left] - arr[right]);
+            
+            if(diff < minDiff || (diff == minDiff && absDiff > maxAbsDiff)){
+                minDiff = diff;
+                maxAbsDiff = absDiff;
+                
+                result.clear();
+                result.add(arr[left]);
+                result.add(arr[right]);
+            } else if (sum < target){
+                left++;
+            } else {
+                right--;
+            }
+        }
+        
+        return result;
+    }
+}
+
+// C++ Code :
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> sumClosest(vector<int>& arr, int target) {
+        int n = arr.size();
+        vector<int> result;
+
+        if (n < 2) return result;
+
+        sort(arr.begin(), arr.end());
+
+        int left = 0, right = n - 1;
+        int minDiff = INT_MAX;
+        int maxAbsDiff = INT_MIN;
+
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            int diff = abs(sum - target);
+            int absDiff = abs(arr[left] - arr[right]);
+
+            if (diff < minDiff || (diff == minDiff && absDiff > maxAbsDiff)) {
+                minDiff = diff;
+                maxAbsDiff = absDiff;
+
+                result.clear();
+                result.push_back(arr[left]);
+                result.push_back(arr[right]);
+            }
+
+            if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return result;
+    }
+};
