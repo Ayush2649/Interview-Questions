@@ -1,0 +1,86 @@
+Companies Asked : Amazon, MicroSoft
+
+// Java Code :
+class Solution {
+    // Function to count the number of possible triangles.
+    static int countTriangles(int arr[]) {
+        // code here
+        int n = arr.length;
+        int count = 0;
+        
+        // Approach 1 - O(n^3)
+        for(int i = 0; i < n; i++){
+            for(int j = i + 1; j < n; j++){
+                for(int k = j + 1; k < n; k++){
+                    if(arr[i] + arr[j] > arr[k] &&
+                      arr[i] + arr[k] > arr[j] &&
+                      arr[j] + arr[k] > arr[i]){
+                          count++;
+                      }
+                }
+            }
+        }
+        
+        // Approach 2 - O(n)
+        Arrays.sort(arr);
+        
+        for(int k = n - 1; k >= 2; k--){
+            int i = 0, j = k - 1;
+            
+            while(i < j){
+                if(arr[i] + arr[j] > arr[k]){
+                    count += (j - i);
+                    j--;
+                } else {
+                    i++;
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+
+// C++ Code :
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    // Function to count the number of possible triangles
+    static int countTriangles(vector<int>& arr) {
+        int n = arr.size();
+        int count = 0;
+
+        // Approach 1 - O(n^3)
+         for(int i = 0; i < n; i++) {
+             for(int j = i + 1; j < n; j++) {
+                 for(int k = j + 1; k < n; k++) {
+                     if(arr[i] + arr[j] > arr[k] &&
+                        arr[i] + arr[k] > arr[j] &&
+                        arr[j] + arr[k] > arr[i]) {
+                         count++;
+                     }
+                 }
+             }
+         }
+
+        // Approach 2 - O(n^2)
+        sort(arr.begin(), arr.end());
+
+        for(int k = n - 1; k >= 2; k--) {
+            int i = 0, j = k - 1;
+
+            while(i < j) {
+                if(arr[i] + arr[j] > arr[k]) {
+                    count += (j - i);
+                    j--;
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        return count;
+    }
+};
